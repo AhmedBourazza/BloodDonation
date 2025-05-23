@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".SignUpPage">
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mainlogo" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColorHint="@color/red"
+        app:hintTextColor="#E72F3E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Email"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:alpha="0.5"
+            android:background="@drawable/button_bg"
+            android:fontFamily="@font/poppinsfont"
+            android:hint="Email"
+            android:padding="10dp"
+            android:textColor="@color/red"
+            android:textSize="18dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cityy"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/red"
+        app:hintTextColor="#E72F3E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:alpha="0.5"
+            android:background="@drawable/button_bg"
+            android:fontFamily="@font/poppinsfont"
+            android:hint="City"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/red"
+            android:textSize="18dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/red"
+        app:hintTextColor="#E72F3E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityy">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:alpha="0.5"
+            android:background="@drawable/button_bg"
+            android:fontFamily="@font/poppinsfont"
+            android:hint="Phone Number"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textColor="#CACACA"
+            android:textSize="18dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pwd"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/red"
+        app:hintTextColor="#E72F3E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blood_group"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/red">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/bld"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:alpha="0.5"
+            android:background="@drawable/button_bg"
+            android:fontFamily="@font/poppinsfont"
+            android:hint="Password"
+            android:padding="10dp"
+            android:password="true"
+            android:textColor="@color/red"
+            android:textSize="18dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppinsfont"
+        android:text="Sign Up"
+        android:textColor="@color/red"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <Button
+        android:id="@+id/modify"
+        android:layout_width="333dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button2"
+        android:fontFamily="@font/poppinsfont"
+        android:text="Become a donor"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pwd" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppinsfont"
+        android:text="Already a donor?"
+        android:textColor="#AE1C52"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/modify"
+        app:layout_constraintTop_toBottomOf="@+id/modify" />
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppinsfont"
+        android:text="Sign In"
+        android:textColor="@color/red"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/modify"
+        app:layout_constraintTop_toBottomOf="@+id/modify" />
+
+    <Spinner
+        android:id="@+id/blood_group"
+        android:layout_width="333dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:gravity="center"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
