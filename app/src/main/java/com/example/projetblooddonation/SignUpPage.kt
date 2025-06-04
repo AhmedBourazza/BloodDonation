@@ -21,6 +21,9 @@ class SignUpPage : AppCompatActivity() {
     var Password: String? = null
     var Mobile: String? = null
     var Category: String? = null
+    private var name: EditText? = null
+    private var Name: String? = null
+
     private var id: EditText? = null
     private var city: EditText? = null
     private var pwd: EditText? = null
@@ -35,6 +38,8 @@ class SignUpPage : AppCompatActivity() {
         setContentView(R.layout.activity_signup_page)
         id = findViewById(R.id.Email)
         city = findViewById(R.id.city)
+        name = findViewById(R.id.name)
+
         bloodgrp = findViewById(R.id.blood_group)
         pwd = findViewById(R.id.bld)
         phone = findViewById(R.id.number)
@@ -68,6 +73,12 @@ class SignUpPage : AppCompatActivity() {
             City = city?.getText().toString()
             Password = pwd?.getText().toString()
             Mobile = phone?.getText().toString()
+            Name = name?.text.toString()
+            if (Name!!.isEmpty()) {
+                name?.error = "Make sure you enter your name!"
+                name?.requestFocus()
+            }
+
             if (Id!!.isEmpty()) {
                 id?.setError("Make sure you enter your email!")
                 id?.requestFocus()
@@ -120,7 +131,7 @@ class SignUpPage : AppCompatActivity() {
     }
 
     private fun insertData() {
-        val user = User(Id, Mobile, Password, City, Category)
+        val user = User(Id, Mobile, Password, City, Category,Name)
         dbref!!.setValue(user).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 startActivity(

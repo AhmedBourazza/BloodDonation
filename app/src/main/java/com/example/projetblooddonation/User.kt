@@ -11,7 +11,8 @@ class User {
     var city: String? = null
     @JvmField
     var bloodgrp: String? = null
-
+    @JvmField
+    var name: String? = null
     constructor()
 
     constructor(
@@ -19,12 +20,16 @@ class User {
         phone: String?,
         password: String?,
         city: String?,
-        bloodgrp: String?
+        bloodgrp: String?,
+        name: String?
+
     ) {
         this.email = email
         this.phone = phone
         this.password = password
         this.city = city
         this.bloodgrp = bloodgrp
+        this.name = name
+
     }
 }

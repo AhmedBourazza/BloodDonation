@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +30,8 @@ import java.util.List;
 public class RequestsFragment extends Fragment {
     RecyclerView recyclerView;
     EditText search;
+    TextView userName;
+
     SwipeRefreshLayout swipeRefreshLayout;
     private List<Request> list;
     private RequestAdapter2 adapter;
@@ -52,6 +57,35 @@ public class RequestsFragment extends Fragment {
         search = view.findViewById(R.id.search);
         recyclerView= view.findViewById(R.id.recyclerView);
         dbref= FirebaseDatabase.getInstance().getReference("Request");
+        userName = view.findViewById(R.id.userName);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            String currentEmail = currentUser.getEmail();
+            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("user");
+
+            usersRef.orderByChild("email").equalTo(currentEmail)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String name = snapshot.child("name").getValue(String.class);
+                                if (name != null) {
+                                    userName.setText(name);
+                                } else {
+                                    userName.setText("Nom non trouvé");
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            userName.setText("Erreur de chargement");
+                        }
+                    });
+        }
+
         dbref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
