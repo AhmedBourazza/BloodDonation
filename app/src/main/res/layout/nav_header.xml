@@ -10,6 +10,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
+        android:id="@+id/imageViewUser"
         android:layout_width="92dp"
         android:layout_height="91dp"
         android:src="@drawable/profil" />
@@ -23,7 +24,7 @@
         android:drawablePadding="5dp"
         android:fontFamily="@font/poppinsfont"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="12dp" />
 
     <TextView
         android:id="@+id/city"
@@ -34,7 +35,7 @@
         android:drawablePadding="5dp"
         android:fontFamily="@font/poppinsfont"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="12dp" />
 
     <TextView
         android:id="@+id/blood"
@@ -46,5 +47,5 @@
         android:drawablePadding="5dp"
         android:fontFamily="@font/poppinsfont"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="12dp" />
 </LinearLayout>

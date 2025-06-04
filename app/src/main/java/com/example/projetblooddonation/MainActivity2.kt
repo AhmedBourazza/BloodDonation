@@ -18,7 +18,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-
+import android.util.Base64
+import android.graphics.BitmapFactory
+import android.widget.ImageView
 class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var email: String? = null
     var city: String? = null
@@ -31,6 +33,7 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     private var user: FirebaseUser? = null
     private var dbref: DatabaseReference? = null
     var rootView: View? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -53,6 +56,11 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             val currentmail = user!!.email
             dbref!!.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    println("onDataChange called with children count: ${dataSnapshot.childrenCount}")
+                    val navigationView = findViewById<NavigationView>(R.id.nav_view)
+
+                    val headerView = navigationView.getHeaderView(0)
                     for (snapshot in dataSnapshot.children) {
                         val User = snapshot.getValue(
                             User::class.java
@@ -65,6 +73,38 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                             mail?.setText(snapshot.child("email").getValue(String::class.java))
                             City?.setText(snapshot.child("city").getValue(String::class.java))
                             Grp?.setText(snapshot.child("bloodgrp").getValue(String::class.java))
+                            val emailFromDb = snapshot.child("email").getValue(String::class.java)
+                            val imageViewUser = headerView.findViewById<ImageView>(R.id.imageViewUser)
+                            println("ImageView récupéré: $imageViewUser")
+
+                            val imageBase64 = snapshot.child("imageBase64").getValue(String::class.java)
+                            println("Base64 image string: $imageBase64")
+
+                            if (!imageBase64.isNullOrEmpty()) {
+                                try {
+                                    println("Début du décodage Base64")
+                                    val decodedString = Base64.decode(imageBase64, Base64.DEFAULT)
+                                    println("Base64 décodé en tableau de bytes, taille: ${decodedString.size}")
+
+                                    val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                                    if (decodedByte == null) {
+                                        println("Erreur : BitmapFactory.decodeByteArray a retourné null")
+                                    } else {
+                                        println("Image décodée en Bitmap avec succès")
+                                        imageViewUser.setImageBitmap(decodedByte)
+                                        println("Bitmap assigné à l'ImageView")
+                                    }
+                                } catch (e: IllegalArgumentException) {
+                                    println("Erreur lors du décodage Base64 : ${e.message}")
+                                    e.printStackTrace()
+                                    // Gérer l'erreur si la chaîne Base64 est mal formée
+                                }
+                            } else {
+                                println("La chaîne Base64 est vide ou nulle, utilisation de l'image par défaut")
+                                // Optionnel: image par défaut si aucune image stockée
+                                imageViewUser.setImageResource(R.drawable.default_user_image)
+                            }
+
                         }
                     }
                 }

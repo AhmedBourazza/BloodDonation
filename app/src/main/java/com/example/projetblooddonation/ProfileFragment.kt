@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
@@ -25,6 +26,8 @@ class ProfileFragment : Fragment() {
     var City: String? = null
     var Bloodgrp: String? = null
     var Phone: String? = null
+    private var profileImage: ImageView? = null
+
     private var mAuth: FirebaseAuth? = null
     private var user: FirebaseUser? = null
     private var modify: Button? = null
@@ -46,6 +49,8 @@ class ProfileFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         user = mAuth!!.currentUser
         modify = view.findViewById(R.id.modify)
+        profileImage = view.findViewById(R.id.profileImage)
+
         modify?.setOnClickListener(View.OnClickListener {
             City = city?.getText().toString()
             Bloodgrp = bloodgrp?.getText().toString()
@@ -121,6 +126,20 @@ class ProfileFragment : Fragment() {
                                     String::class.java
                                 )
                             )
+                            // Récupère l’image Base64
+                            val base64Image = snapshot.child("imageBase64").getValue(String::class.java)
+                            if (!base64Image.isNullOrEmpty()) {
+                                try {
+                                    val decodedBytes = android.util.Base64.decode(base64Image, android.util.Base64.DEFAULT)
+                                    val bitmap = android.graphics.BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+                                    profileImage?.setImageBitmap(bitmap)
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                    profileImage?.setImageResource(R.drawable.default_user_image)
+                                }
+                            } else {
+                                profileImage?.setImageResource(R.drawable.default_user_image)
+                            }
                         }
                     }
                 }

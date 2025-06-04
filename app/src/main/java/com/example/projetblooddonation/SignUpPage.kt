@@ -14,6 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import android.widget.ImageView
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
+import java.io.ByteArrayOutputStream
 
 class SignUpPage : AppCompatActivity() {
     var Id: String? = null
@@ -23,6 +28,11 @@ class SignUpPage : AppCompatActivity() {
     var Category: String? = null
     private var name: EditText? = null
     private var Name: String? = null
+    private val PICK_IMAGE_REQUEST = 1
+    private var userImageView: ImageView? = null
+    private var btnChooseImage: Button? = null
+    private var imageBase64: String? = null
+
 
     private var id: EditText? = null
     private var city: EditText? = null
@@ -47,6 +57,11 @@ class SignUpPage : AppCompatActivity() {
         signin = findViewById(R.id.register)
         auth = FirebaseAuth.getInstance()
         val items = arrayOf("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
+        userImageView = findViewById(R.id.userImage)
+        btnChooseImage = findViewById(R.id.btnChooseImage)
+        btnChooseImage?.setOnClickListener {
+            openGallery()
+        }
 
         bloodgrp?.setAdapter(
             ArrayAdapter(
@@ -131,31 +146,49 @@ class SignUpPage : AppCompatActivity() {
     }
 
     private fun insertData() {
-        val user = User(Id, Mobile, Password, City, Category,Name)
+        // Assure-toi que Name est une variable de classe initialisée avant cet appel
+        val user = User(Id, Mobile, Password, City, Category, Name, imageBase64)
         dbref!!.setValue(user).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                startActivity(
-                    Intent(
-                        this@SignUpPage,
-                        MainActivity2::class.java
-                    )
-                )
-                Toast.makeText(
-                    this@SignUpPage,
-                    "Donor added with success!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@SignUpPage, "Donor added with success!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@SignUpPage, MainActivity2::class.java))
                 finish()
             } else {
-                // Log the error details
                 val exception = task.exception
                 exception?.printStackTrace()
-                Toast.makeText(
-                    this@SignUpPage,
-                    "Error adding donor: " + exception!!.message,
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@SignUpPage, "Error adding donor: ${exception?.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    private fun openGallery() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Choisir une image"), PICK_IMAGE_REQUEST)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+            val uri = data.data
+            try {
+                val inputStream = contentResolver.openInputStream(uri!!)
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                userImageView?.setImageBitmap(bitmap) // montre l’image choisie
+                imageBase64 = encodeImageToBase64(bitmap)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+
+
+    private fun encodeImageToBase64(bitmap: Bitmap): String {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+    }
+
 }

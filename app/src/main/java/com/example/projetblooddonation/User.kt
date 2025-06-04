@@ -13,6 +13,10 @@ class User {
     var bloodgrp: String? = null
     @JvmField
     var name: String? = null
+    @JvmField
+    var imageBase64: String? = null
+
+
     constructor()
 
     constructor(
@@ -21,8 +25,8 @@ class User {
         password: String?,
         city: String?,
         bloodgrp: String?,
-        name: String?
-
+        name: String?,
+        imageBase64: String?
     ) {
         this.email = email
         this.phone = phone
@@ -30,6 +34,7 @@ class User {
         this.city = city
         this.bloodgrp = bloodgrp
         this.name = name
+        this.imageBase64 = imageBase64
 
     }
 }
