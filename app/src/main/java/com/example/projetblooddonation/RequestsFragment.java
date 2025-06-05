@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,8 @@ public class RequestsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ImageView imageViewCurrent = view.findViewById(R.id.imageViewCurrent);
+
         swipeRefreshLayout=view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -71,10 +74,27 @@ public class RequestsFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 String name = snapshot.child("name").getValue(String.class);
-                                if (name != null) {
-                                    userName.setText(name);
+                                String imageBase64 = snapshot.child("imageBase64").getValue(String.class);
+                                if (imageBase64 != null && !imageBase64.isEmpty()) {
+                                    try {
+                                        byte[] decodedString = android.util.Base64.decode(imageBase64, android.util.Base64.DEFAULT);
+                                        android.graphics.Bitmap decodedByte = android.graphics.BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                        if (decodedByte != null) {
+                                            imageViewCurrent.setImageBitmap(decodedByte);
+                                        }
+                                    } catch (IllegalArgumentException e) {
+                                        e.printStackTrace();
+                                        // Gérer erreur de décodage
+                                    }
                                 } else {
-                                    userName.setText("Nom non trouvé");
+                                    // Optionnel : image par défaut si aucune image Base64
+                                    imageViewCurrent.setImageResource(R.drawable.default_user_image);
+                                }
+
+                                if (name != null) {
+                                   // userName.setText(name);
+                                } else {
+                                  //  userName.setText("Nom non trouvé");
                                 }
                             }
                         }

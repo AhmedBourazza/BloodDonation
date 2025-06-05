@@ -58,7 +58,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/profil" />
+            android:src="@drawable/femalephoto" />
 
         <Button
             android:id="@+id/btnChooseImage"
@@ -74,6 +74,7 @@
         android:id="@+id/textInput"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textColorHint="@color/red"
         app:hintTextColor="#E72F3E"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
@@ -138,7 +139,7 @@
             android:hint="Phone Number"
             android:inputType="number"
             android:padding="10dp"
-            android:textColor="#CACACA"
+            android:textColor="@color/red"
             android:textSize="18dp" />
 
     </com.google.android.material.textfield.TextInputLayout>

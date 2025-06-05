@@ -53,7 +53,10 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         toggle.syncState()
         if (user != null) {
             val uid = user!!.uid
+            val imageViewUserMain = findViewById<ImageView>(R.id.imageCurrentUser)
+
             val currentmail = user!!.email
+
             dbref!!.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
 
@@ -61,6 +64,8 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                     val navigationView = findViewById<NavigationView>(R.id.nav_view)
 
                     val headerView = navigationView.getHeaderView(0)
+                    val imageViewUser = headerView.findViewById<ImageView>(R.id.imageViewUser)
+
                     for (snapshot in dataSnapshot.children) {
                         val User = snapshot.getValue(
                             User::class.java
@@ -75,6 +80,8 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                             Grp?.setText(snapshot.child("bloodgrp").getValue(String::class.java))
                             val emailFromDb = snapshot.child("email").getValue(String::class.java)
                             val imageViewUser = headerView.findViewById<ImageView>(R.id.imageViewUser)
+                            val imageCurrentUser = findViewById<ImageView>(R.id.imageCurrentUser)
+
                             println("ImageView récupéré: $imageViewUser")
 
                             val imageBase64 = snapshot.child("imageBase64").getValue(String::class.java)
@@ -92,6 +99,8 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                                     } else {
                                         println("Image décodée en Bitmap avec succès")
                                         imageViewUser.setImageBitmap(decodedByte)
+                                        imageCurrentUser.setImageBitmap(decodedByte)
+
                                         println("Bitmap assigné à l'ImageView")
                                     }
                                 } catch (e: IllegalArgumentException) {
@@ -103,6 +112,8 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                                 println("La chaîne Base64 est vide ou nulle, utilisation de l'image par défaut")
                                 // Optionnel: image par défaut si aucune image stockée
                                 imageViewUser.setImageResource(R.drawable.default_user_image)
+                                imageCurrentUser.setImageResource(R.drawable.default_user_image)
+
                             }
 
                         }

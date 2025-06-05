@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/bg"
+        android:background="@drawable/rounded_background"
+
         >
 
         <LinearLayout
@@ -21,9 +22,10 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp">
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/comment"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:src="@drawable/donor"/>
             <TextView
                 android:id="@+id/request_content"
                 android:layout_width="wrap_content"
@@ -31,7 +33,7 @@
                 android:text="Request Content: "
                 android:textSize="18sp"
                 android:layout_marginStart="5dp"
-                android:textColor="#CACACA"
+                android:textColor="@color/black"
                 android:fontFamily="@font/poppinsfont"
                 />
         </LinearLayout>
@@ -48,7 +50,7 @@
                 android:layout_marginBottom="5dp"
                 android:textSize="18sp"
                 android:layout_marginStart="5dp"
-                android:textColor="#CACACA"
+                android:textColor="@color/black"
                 android:fontFamily="@font/poppinsfont"
                 />
         </LinearLayout>

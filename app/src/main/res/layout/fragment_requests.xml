@@ -25,38 +25,37 @@
                 <LinearLayout
                     android:layout_width="293dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:weightSum="1">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/userName"
-                        android:fontFamily="@font/poppinsfont"
-                        android:text="B. Ahmed"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/black"
-                        android:textSize="28dp"
-                        android:textStyle="bold" />
+                    <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        app:srcCompat="@drawable/blooddonation" />
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/userName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/poppinsfont"
-                        android:text="Blood group O+"
+                        android:text="All Requests"
                         android:textAlignment="viewStart"
+
                         android:textColor="@color/black"
-                        android:textSize="15dp"
+                        android:textSize="30dp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/imageView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewCurrent"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_weight="0.5"
                     app:srcCompat="@drawable/profil" />
 
@@ -74,7 +73,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:fontFamily="@font/poppinsfont"
-                android:textColorHint="@color/red"
+                android:textColorHint="@color/black"
                 android:hint=" Search here..."
                 android:visibility="gone"
                 android:layout_marginBottom="10dp"/>

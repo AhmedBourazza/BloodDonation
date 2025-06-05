@@ -38,7 +38,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/baseline_alternate_email_24"
+                    android:src="@drawable/emil"
 
                     />
 
@@ -64,7 +64,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/baseline_add_location_24" />
+                    android:src="@drawable/city" />
 
                 <TextView
                     android:id="@+id/city"
@@ -88,7 +88,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/baseline_bloodtype_24" />
+                    android:src="@drawable/blood" />
 
                 <TextView
                     android:id="@+id/Bloodgrp"
@@ -113,7 +113,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/baseline_call_24" />
+                    android:src="@drawable/phonen" />
 
                 <TextView
                     android:id="@+id/phone"
@@ -143,7 +143,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/comment" />
+                        android:src="@drawable/content" />
 
                     <TextView
                         android:id="@+id/request_content"

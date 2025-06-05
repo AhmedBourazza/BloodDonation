@@ -11,8 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg"
-        android:orientation="horizontal">
+        android:background="@color/bg"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <ImageView
             android:id="@+id/imageViewUser"
@@ -49,7 +50,7 @@
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/poppinsfont"
                         android:text="Email"
-                        android:textColor="#CACACA"
+                        android:textColor="@color/black"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -74,7 +75,7 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/poppinsfont"
                     android:text="City"
-                    android:textColor="#CACACA"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -98,7 +99,7 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/poppinsfont"
                     android:text="Bood Group"
-                    android:textColor="#CACACA"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -123,7 +124,7 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/poppinsfont"
                     android:text="Phone Number"
-                    android:textColor="#CACACA"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
             </LinearLayout>
